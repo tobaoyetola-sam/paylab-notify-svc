@@ -20,7 +20,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok', service: SERVICE }));
 
 app.post('/notify', (req, res) => {
   const { paymentId, reference, status, reason, amountKobo, note, payer = {}, payee = {} } = req.body || {};
-  const common = { paymentId, reference, amount: naira(amountKobo), note: note || undefined };
+  const common = { paymentId, reference, amount: naira(amountKobo), note: note || undefined, from: 'aricxpoint labs PayLab' };
 
   if (status === 'success') {
     log('info', 'receipt', { receipt: { type: 'sent', to: `@${payer.handle}`, counterparty: `@${payee.handle}`, ...common } });
